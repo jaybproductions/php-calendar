@@ -26,11 +26,12 @@ function GetMonths() {
     for($month = 1; $month < 13; $month++) {
         //i could probably optimize this because right now it's taking in 2001 as the year by default -- not sure at the moment
         $dateObj = date("F", strtotime('01.'.$month.'.2001')); 
-        array_push($monthArr, $dateObj);
+        $monthArr[$month]=$dateObj;
     }
     
     return $monthArr;
 }
+
 
 //Get the number of days in the month by month and year --> This account for leap years
 function GetDaysInMonth($month, $year) {
@@ -57,7 +58,7 @@ function HandleStartingDay($month) {
     $startDay = $month[0];
     //remove unneeded data from the string only need "XXX"
     $stripped = substr($startDay, -3); 
-
+   
     switch($stripped) {
         case "Sun":
             return "";
@@ -132,7 +133,7 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
         height: 100%;
         grid-gap: 10px;
         grid-template-columns: repeat(4, 200px);
-        grid-template-rows: 200px 200px 200px;
+        grid-template-rows: repeat(4, 200px);
     }
 
     .month {
@@ -167,6 +168,7 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
     .days ul {
         float: left;
         padding: 0px 0;
+        height: 200px;
         background: #eee;
         margin: 0;
     }
@@ -207,8 +209,8 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
                                 <?= $dayStr; ?> <?php endforeach; ?>
                             </div>  
                         <ul class="days">
-                            <?php echo HandleStartingDay(GetDaysInMonth($key + 1, $year)); ?>
-                            <?php foreach(GetDaysInMonth($key + 1, $year) as $key=>$day): ?> 
+                            <?php echo HandleStartingDay(GetDaysInMonth($key, $year)); ?>
+                            <?php foreach(GetDaysInMonth($key, $year) as $key=>$day): ?> 
                             <li class="day">
                                 <?= $key + 1 ?>
                             </li>
