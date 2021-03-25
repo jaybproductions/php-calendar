@@ -1,0 +1,7 @@
+[X] get current year for when input is empty
+[X] input for year, store as var
+[X] loop through 12 months and store month/monthname as key value pair array
+[X] for each month get each day of the month
+[X] get the first day of each month
+[X] make sure month starts on correct day
+[X] formatting and display on page in 4 row 4 column
