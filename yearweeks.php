@@ -182,12 +182,32 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
         margin-bottom: 5px;
         font-size:12px;
         float: left;
+        cursor: pointer;
     }
 
 </style>
 
 
 <html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        //simple script that will log the month, day, year of the clicked element 
+        //just in case we want to add content to specific days
+    window.onclick = function(e) {
+
+        if(e.target.className === "day") {
+            
+            const monthName = $(e.target).parent().parent().children('.month-name').text();
+            const day = e.target.textContent;
+            const year = <?php echo $year; ?>;
+            console.log(monthName, day, year);
+       
+        }     
+    }
+
+    </script>
+    </head>
     <body>
         <div>
             <div class="year-input">
