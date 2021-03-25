@@ -99,19 +99,18 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
 
 
 <style>
-    body {
+    body, html {
         margin: auto;
-        padding: 20px;
         text-align: center;
-        height: 50%;
+        height: 100%;
         width: 100%;
     }
 
     .year-input  {
         padding-top: 20px;
         margin: auto;
-        padding: 70px, 0;
         height: 10%;
+        width: 50%;
         text-align: left;
     }
 
@@ -129,7 +128,7 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
     .container {
         margin: auto;
         display: grid;
-        width: 100%;
+        width: 50%;
         grid-gap: 10px;
         grid-template-columns: repeat(4, 200px);
         grid-template-rows: 100% 100% 100%;
