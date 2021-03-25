@@ -129,9 +129,10 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
         margin: auto;
         display: grid;
         width: 50%;
+        height: 100%;
         grid-gap: 10px;
         grid-template-columns: repeat(4, 200px);
-        grid-template-rows: 100% 100% 100%;
+        grid-template-rows: 200px 200px 200px;
     }
 
     .month {
