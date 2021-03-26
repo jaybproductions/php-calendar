@@ -49,31 +49,32 @@ for($i = 1; $i < 13; $i++) {
 } */
 
 //Start by getting the current year
-function GetCurrentYear() {
+function GetCurrentYear()
+{
     $current_year = date("Y");
     return $current_year;
 }
 
 //Setting the current year based on if the input is empty or not
-function SetYear() {
-
-    if(isset($_GET['year'])) {
+function SetYear()
+{
+    if (isset($_GET['year'])) {
         $year = $_GET['year'];
-        return $year;  
-    }else {
+        return $year;
+    } else {
         $current_year = GetCurrentYear();
         return $current_year;
     }
 }
 
 //Getting the months and storing them in an array
-function GetMonths() {
-
+function GetMonths()
+{
     $monthArr = array();
     
-    for($month = 1; $month < 13; $month++) {
+    for ($month = 1; $month < 13; $month++) {
         //i could probably optimize this because right now it's taking in 2001 as the year by default -- not sure at the moment
-        $dateObj = date("F", strtotime('01.'.$month.'.2001')); 
+        $dateObj = date("F", strtotime('01.'.$month.'.2001'));
         $monthArr[$month]=$dateObj;
     }
     
@@ -82,18 +83,16 @@ function GetMonths() {
 
 
 //Get the number of days in the month by month and year --> This account for leap years
-function GetDaysInMonth($month, $year) {
-    
+function GetDaysInMonth($month, $year)
+{
     $days_in_month=array();
 
-    for($d=1; $d<=31; $d++)
-    {
-        $time=mktime(12, 0, 0, $month, $d, $year);   
-        //if the date is valid push it to the array -- useful for months with less than 31 days       
-        if (date('m', $time)==$month){
+    for ($d=1; $d<=31; $d++) {
+        $time=mktime(12, 0, 0, $month, $d, $year);
+        //if the date is valid push it to the array -- useful for months with less than 31 days
+        if (date('m', $time)==$month) {
             $days_in_month[]=date('Y-m-d-D', $time);
-        }       
-            
+        }
     }
     
     return $days_in_month;
@@ -101,13 +100,14 @@ function GetDaysInMonth($month, $year) {
 
 
 //Handling getting the starting date = this is not optimal - need to find a better way
-function HandleStartingDay($month) {
+function HandleStartingDay($month)
+{
     //get the first day of the month
     $startDay = $month[0];
     //remove unneeded data from the string only need "XXX"
-    $stripped = substr($startDay, -3); 
+    $stripped = substr($startDay, -3);
    
-    switch($stripped) {
+    switch ($stripped) {
         case "Sun":
             return "";
             break;
@@ -129,8 +129,8 @@ function HandleStartingDay($month) {
         case "Sat":
             return '<li></li><li></li><li></li><li></li><li></li><li></li>';
             break;
-        default: 
-            return ""; 
+        default:
+            return "";
             break;
     }
 }
@@ -138,7 +138,7 @@ function HandleStartingDay($month) {
 
 //Setting the year
 $year = SetYear();
-//Setting the months 
+//Setting the months
 $months = GetMonths();
 //Setting the day strings for the UI
 $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
@@ -208,7 +208,6 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
 
     .days {
         padding: 10px 0;
-        background: #eee;
         margin: 0;
     
     }
@@ -217,7 +216,6 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
         float: left;
         padding: 0px 0;
         height: 200px;
-        background: #eee;
         margin: 0;
     }
 
@@ -269,16 +267,16 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
                 <div class="current-year">
                     <?php echo $year?>
                 </div>
-                <?php foreach($months as $key=>$value): ?>
+                <?php foreach ($months as $key=>$value): ?>
                     <div class="month">
                         <div class="month-name"><?= $value; ?></div>
                             <div class="day-string">
-                                <?php foreach($dayStrings as $dayStr): ?>
+                                <?php foreach ($dayStrings as $dayStr): ?>
                                 <?= $dayStr; ?> <?php endforeach; ?>
                             </div>  
                         <ul class="days">
                             <?php echo HandleStartingDay(GetDaysInMonth($key, $year)); ?>
-                            <?php foreach(GetDaysInMonth($key, $year) as $key=>$day): ?> 
+                            <?php foreach (GetDaysInMonth($key, $year) as $key=>$day): ?> 
                             <li class="day">
                                 <?= $key + 1 ?>
                             </li>
