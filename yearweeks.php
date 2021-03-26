@@ -1,5 +1,53 @@
 <?php
 
+
+//Start of OOP way -- better for scalability 
+/* class Calendar {
+    public $month;
+    public $year; 
+    public $days_in_month; 
+    
+    public function __construct($month, $year, $days_in_month) {
+        $this->month = $month;
+        $this->year = $year;
+        $this->days_in_month = $days_in_month;
+    }
+    
+    public function GetMonth() {
+        
+        $date = date('F', strtotime('01.'.$this->month. '.2001'));
+        return $date;
+    }
+    
+    public function GetDays() {
+        $month = $this->month;
+        $year = $this->year;
+         $days_in_month=array();
+
+        for($d=1; $d<=31; $d++)
+        {
+        $time=mktime(12, 0, 0, $month, $d, $year);   
+        //if the date is valid push it to the array -- useful for months with less than 31 days       
+        if (date('m', $time)==$month){
+            $days_in_month[$d]=date('Y-m-d-D', $time);
+        }       
+            
+    }
+    
+    return $days_in_month;
+        
+    }
+} 
+
+
+for($i = 1; $i < 13; $i++) {
+    $calendar = new Calendar($i, 2020, 31);
+    $monthArr  = [];
+   $month = $calendar->GetDays();
+   $monthArr[$calendar->GetMonth()] = $month; 
+  print_r($monthArr);
+} */
+
 //Start by getting the current year
 function GetCurrentYear() {
     $current_year = date("Y");
@@ -197,7 +245,7 @@ $dayStrings = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
     window.onclick = function(e) {
 
         if(e.target.className === "day") {
-            
+
             const monthName = $(e.target).parent().parent().children('.month-name').text();
             const day = e.target.textContent;
             const year = <?php echo $year; ?>;
